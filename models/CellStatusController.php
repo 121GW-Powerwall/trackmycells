@@ -1,18 +1,18 @@
 <?php
 
-namespace app\controllers;
+namespace app\models;
 
 use Yii;
-use app\models\Cell;
-use app\models\CellSearch;
+use app\models\CellStatus;
+use app\models\CellStatusSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CellController implements the CRUD actions for Cell model.
+ * CellStatusController implements the CRUD actions for CellStatus model.
  */
-class CellController extends Controller
+class CellStatusController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class CellController extends Controller
     }
 
     /**
-     * Lists all Cell models.
+     * Lists all CellStatus models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CellSearch();
+        $searchModel = new CellStatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class CellController extends Controller
     }
 
     /**
-     * Displays a single Cell model.
+     * Displays a single CellStatus model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class CellController extends Controller
     }
 
     /**
-     * Creates a new Cell model.
+     * Creates a new CellStatus model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Cell();
+        $model = new CellStatus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class CellController extends Controller
     }
 
     /**
-     * Updates an existing Cell model.
+     * Updates an existing CellStatus model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class CellController extends Controller
     }
 
     /**
-     * Deletes an existing Cell model.
+     * Deletes an existing CellStatus model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class CellController extends Controller
     }
 
     /**
-     * Finds the Cell model based on its primary key value.
+     * Finds the CellStatus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Cell the loaded model
+     * @return CellStatus the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Cell::findOne($id)) !== null) {
+        if (($model = CellStatus::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

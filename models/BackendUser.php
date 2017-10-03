@@ -5,15 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Backend_User".
+ * This is the model class for table "backendUser".
  *
- * @property string $User_ID
- * @property string $FirstName
- * @property string $LastName
- * @property string $User_Name
- * @property string $Password
+ * @property string $user_id
+ * @property string $firstName
+ * @property string $lastName
+ * @property string $userName
+ * @property string $password
  * @property string $authKey
- * @property string $Last_Login
+ * @property string $lastLogin
  */
 class BackendUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -22,7 +22,7 @@ class BackendUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public static function tableName()
     {
-        return 'Backend_User';
+        return 'backendUser';
     }
 
     /**
@@ -44,13 +44,13 @@ class BackendUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
     public function attributeLabels()
     {
         return [
-            'id' => 'User ID',
+            'id' => 'user_id',
             'firstName' => 'First Name',
             'lastName' => 'Last Name',
             'usermame' => 'User Name',
             'password' => 'Password',
             'authKey' => 'Auth Key',
-            'lastLogin' => 'Last  Login',
+            'lastLogin' => 'Last Login',
         ];
     }
     

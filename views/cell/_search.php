@@ -15,23 +15,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'Cell_ID') ?>
+    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'Donor_Pack_ID') ?>
+    <?= $form->field($model, 'donorPack_id') ?>
 
-    <?= $form->field($model, 'Cell_Model_ID') ?>
+    <?= $form->field($model, 'cellModel_id') ?>
 
-    <?= $form->field($model, 'User_ID') ?>
+    <?= $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'Cell_Status_ID') ?>
+    <?= $form->field($model, 'cellStatus_id') ?>
 
-    <?php // echo $form->field($model, 'Cell_Label') ?>
+    <?php // echo $form->field($model, 'label') ?>
 
-    <?php // echo $form->field($model, 'Last_Capacity_Test_ID') ?>
+    <?php // echo $form->field($model, 'lastTestCapacity_id') ?>
 
-    <?php // echo $form->field($model, 'Last_Imp_Test_ID') ?>
+    <?php // echo $form->field($model, 'lastTestImp_id') ?>
 
-    <?php // echo $form->field($model, 'Last_Voltage_Test_ID') ?>
+    <?php // echo $form->field($model, 'lastTestVoltage_id') ?>
 
     <?php // echo $form->field($model, 'Notes') ?>
 

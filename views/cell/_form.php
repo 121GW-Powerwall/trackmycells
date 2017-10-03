@@ -12,21 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'Donor_Pack_ID')->textInput() ?>
+    <?= $form->field($model, 'donorPack_id')->textInput() ?>
 
-    <?= $form->field($model, 'Cell_Model_ID')->textInput() ?>
+    <?= $form->field($model, 'cellModel_id')->textInput() ?>
 
-    <?= $form->field($model, 'User_ID')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Cell_Status_ID')->textInput() ?>
+    <?= $form->field($model, 'cellStatus_id')->textInput() ?>
 
-    <?= $form->field($model, 'Cell_Label')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Last_Capacity_Test_ID')->textInput() ?>
+    <?= $form->field($model, 'lastTestCapacity_id')->textInput() ?>
 
-    <?= $form->field($model, 'Last_Imp_Test_ID')->textInput() ?>
+    <?= $form->field($model, 'lastTestImp_id')->textInput() ?>
 
-    <?= $form->field($model, 'Last_Voltage_Test_ID')->textInput() ?>
+    <?= $form->field($model, 'lastTestVoltage_id')->textInput() ?>
 
     <?= $form->field($model, 'Notes')->textInput(['maxlength' => true]) ?>
 

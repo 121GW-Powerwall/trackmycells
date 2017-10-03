@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cell */
+/* @var $model app\models\CellStatus */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Cells', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Cell Statuses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cell-view">
+<div class="cell-status-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,15 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'donorPack_id',
-            'cellModel_id',
-            'user_id',
-            'cellStatus_id',
-            'label',
-            'lastTestCapacity_id',
-            'lastTestImp_id',
-            'lastTestVoltage_id',
-            'Notes',
+            'active',
+            'name',
         ],
     ]) ?>
 

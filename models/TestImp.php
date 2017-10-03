@@ -1,0 +1,78 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "testImp".
+ *
+ * @property integer $id
+ * @property integer $cell_id
+ * @property integer $impedance
+ * @property string $testDate
+ *
+ * @property Cell[] $cells
+ * @property Cell $cell
+ */
+class TestImp extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'testImp';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['cell_id', 'impedance', 'testDate'], 'required'],
+            [['cell_id', 'impedance'], 'integer'],
+            [['testDate'], 'safe'],
+            [['cell_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cell::className(), 'targetAttribute' => ['cell_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'cell_id' => Yii::t('app', 'Cell ID'),
+            'impedance' => Yii::t('app', 'Impedance'),
+            'testDate' => Yii::t('app', 'Test Date'),
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCells()
+    {
+        return $this->hasMany(Cell::className(), ['lastTestImp_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCell()
+    {
+        return $this->hasOne(Cell::className(), ['id' => 'cell_id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return TestImpQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new TestImpQuery(get_called_class());
+    }
+}

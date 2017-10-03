@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cell */
 
-$this->title = 'Update Cell: ' . $model->Cell_ID;
+$this->title = 'Update Cell: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Cells', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Cell_ID, 'url' => ['view', 'id' => $model->Cell_ID]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="cell-update">

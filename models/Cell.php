@@ -5,18 +5,28 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Cell".
+ * This is the model class for table "cell".
  *
- * @property integer $Cell_ID
- * @property integer $Donor_Pack_ID
- * @property integer $Cell_Model_ID
- * @property integer $User_ID
- * @property integer $Cell_Status_ID
- * @property string $Cell_Label
- * @property integer $Last_Capacity_Test_ID
- * @property integer $Last_Imp_Test_ID
- * @property integer $Last_Voltage_Test_ID
+ * @property integer $id
+ * @property integer $donorPack_id
+ * @property integer $cellModel_id
+ * @property string $user_id
+ * @property integer $cellStatus_id
+ * @property string $label
+ * @property integer $lastTestCapacity_id
+ * @property integer $lastTestImp_id
+ * @property integer $lastTestVoltage_id
  * @property string $Notes
+ *
+ * @property CellModel $cellModel
+ * @property CellStatus $cellStatus
+ * @property DonorPack $donorPack
+ * @property TestCapacity $lastTestCapacity
+ * @property TestImp $lastTestImp
+ * @property TestVoltage $lastTestVoltage
+ * @property BackendUser $user
+ * @property TestCapacity[] $testCapacities
+ * @property TestImp[] $testImps
  */
 class Cell extends \yii\db\ActiveRecord
 {
@@ -25,7 +35,7 @@ class Cell extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Cell';
+        return 'cell';
     }
 
     /**
@@ -34,10 +44,17 @@ class Cell extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Donor_Pack_ID', 'Cell_Model_ID', 'User_ID', 'Cell_Status_ID'], 'required'],
-            [['Donor_Pack_ID', 'Cell_Model_ID', 'User_ID', 'Cell_Status_ID', 'Last_Capacity_Test_ID', 'Last_Imp_Test_ID', 'Last_Voltage_Test_ID'], 'integer'],
-            [['Cell_Label'], 'string', 'max' => 100],
+            [['donorPack_id', 'cellModel_id', 'user_id', 'cellStatus_id'], 'required'],
+            [['donorPack_id', 'cellModel_id', 'user_id', 'cellStatus_id', 'lastTestCapacity_id', 'lastTestImp_id', 'lastTestVoltage_id'], 'integer'],
+            [['label'], 'string', 'max' => 100],
             [['Notes'], 'string', 'max' => 255],
+            [['cellModel_id'], 'exist', 'skipOnError' => true, 'targetClass' => CellModel::className(), 'targetAttribute' => ['cellModel_id' => 'id']],
+            [['cellStatus_id'], 'exist', 'skipOnError' => true, 'targetClass' => CellStatus::className(), 'targetAttribute' => ['cellStatus_id' => 'id']],
+            [['donorPack_id'], 'exist', 'skipOnError' => true, 'targetClass' => DonorPack::className(), 'targetAttribute' => ['donorPack_id' => 'id']],
+            [['lastTestCapacity_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestCapacity::className(), 'targetAttribute' => ['lastTestCapacity_id' => 'id']],
+            [['lastTestImp_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestImp::className(), 'targetAttribute' => ['lastTestImp_id' => 'id']],
+            [['lastTestVoltage_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestVoltage::className(), 'targetAttribute' => ['lastTestVoltage_id' => 'Test_Voltage_ID']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => BackendUser::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -47,21 +64,97 @@ class Cell extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cell_ID' => 'Cell ID',
-            'Donor_Pack_ID' => 'Donor Pack ID',
-            'Cell_Model_ID' => 'Cell Model ID',
-            'User_ID' => 'User ID',
-            'Cell_Status_ID' => 'Cell Status ID',
-            'Cell_Label' => 'Cell Label',
-            'Last_Capacity_Test_ID' => 'Last Capacity Test ID',
-            'Last_Imp_Test_ID' => 'Last  Imp Test ID',
-            'Last_Voltage_Test_ID' => 'Last Voltage Test ID',
-            'Notes' => 'Notes',
+            'id' => Yii::t('app', 'ID'),
+            'donorPack_id' => Yii::t('app', 'Donor Pack ID'),
+            'cellModel_id' => Yii::t('app', 'Cell Model ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'cellStatus_id' => Yii::t('app', 'Cell Status ID'),
+            'label' => Yii::t('app', 'Label'),
+            'lastTestCapacity_id' => Yii::t('app', 'Last Test Capacity ID'),
+            'lastTestImp_id' => Yii::t('app', 'Last Test Imp ID'),
+            'lastTestVoltage_id' => Yii::t('app', 'Last Test Voltage ID'),
+            'Notes' => Yii::t('app', 'Notes'),
         ];
     }
-    public function getCells()
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellModel()
     {
-        return $this->hasOne(Donor_Pack::className(), ['Donor_Pack_ID' => 'Donor_Pack_ID']);
-        
+        return $this->hasOne(CellModel::className(), ['id' => 'cellModel_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellStatus()
+    {
+        return $this->hasOne(CellStatus::className(), ['id' => 'cellStatus_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDonorPack()
+    {
+        return $this->hasOne(DonorPack::className(), ['id' => 'donorPack_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLastTestCapacity()
+    {
+        return $this->hasOne(TestCapacity::className(), ['id' => 'lastTestCapacity_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLastTestImp()
+    {
+        return $this->hasOne(TestImp::className(), ['id' => 'lastTestImp_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLastTestVoltage()
+    {
+        return $this->hasOne(TestVoltage::className(), ['Test_Voltage_ID' => 'lastTestVoltage_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(BackendUser::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestCapacities()
+    {
+        return $this->hasMany(TestCapacity::className(), ['cell_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestImps()
+    {
+        return $this->hasMany(TestImp::className(), ['cell_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return CellQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CellQuery(get_called_class());
     }
 }

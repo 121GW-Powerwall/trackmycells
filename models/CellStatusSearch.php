@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Cell;
+use app\models\CellStatus;
 
 /**
- * CellSearch represents the model behind the search form about `app\models\Cell`.
+ * CellStatusSearch represents the model behind the search form about `app\models\CellStatus`.
  */
-class CellSearch extends Cell
+class CellStatusSearch extends CellStatus
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class CellSearch extends Cell
     public function rules()
     {
         return [
-            [['id', 'donorPack_id', 'cellModel_id', 'user_id', 'cellStatus_id', 'lastTestCapacity_id', 'lastTestImp_id', 'lastTestVoltage_id'], 'integer'],
-            [['label', 'Notes'], 'safe'],
+            [['id', 'active'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CellSearch extends Cell
      */
     public function search($params)
     {
-        $query = Cell::find();
+        $query = CellStatus::find();
 
         // add conditions that should always apply here
 
@@ -60,17 +60,10 @@ class CellSearch extends Cell
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'donorPack_id' => $this->donorPack_id,
-            'cellModel_id' => $this->cellModel_id,
-            'user_id' => $this->user_id,
-            'cellStatus_id' => $this->cellStatus_id,
-            'lastTestCapacity_id' => $this->lastTestCapacity_id,
-            'lastTestImp_id' => $this->lastTestImp_id,
-            'lastTestVoltage_id' => $this->lastTestVoltage_id,
+            'active' => $this->active,
         ]);
 
-        $query->andFilterWhere(['like', 'label', $this->label])
-            ->andFilterWhere(['like', 'Notes', $this->Notes]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
