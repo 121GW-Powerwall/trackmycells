@@ -18,7 +18,7 @@ class TestcapacitySearch extends Testcapacity
     public function rules()
     {
         return [
-            [['id', 'cellId', 'capacity'], 'integer'],
+            [['id', 'cell_id', 'capacity'], 'integer'],
             [['testDate'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class TestcapacitySearch extends Testcapacity
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'cellId' => $this->cellId,
+            'cell_id' => $this->cell_id,
             'capacity' => $this->capacity,
             'testDate' => $this->testDate,
         ]);

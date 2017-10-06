@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Cellsize;
+use app\models\CellSize;
 
 /**
- * CellsizeSearch represents the model behind the search form about `app\models\Cellsize`.
+ * CellSizeSearch represents the model behind the search form about `app\models\CellSize`.
  */
-class CellsizeSearch extends Cellsize
+class CellSizeSearch extends CellSize
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class CellsizeSearch extends Cellsize
     public function rules()
     {
         return [
-            [['Cell_Size_ID'], 'integer'],
-            [['Name'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CellsizeSearch extends Cellsize
      */
     public function search($params)
     {
-        $query = Cellsize::find();
+        $query = CellSize::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,10 @@ class CellsizeSearch extends Cellsize
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Cell_Size_ID' => $this->Cell_Size_ID,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Name', $this->Name]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

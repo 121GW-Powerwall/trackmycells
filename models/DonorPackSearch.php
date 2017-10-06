@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Manufacture;
+use app\models\DonorPack;
 
 /**
- * ManufactureSearch represents the model behind the search form about `app\models\Manufacture`.
+ * DonorPackSearch represents the model behind the search form about `app\models\DonorPack`.
  */
-class ManufactureSearch extends Manufacture
+class DonorPackSearch extends DonorPack
 {
     /**
      * @inheritdoc
@@ -18,8 +18,9 @@ class ManufactureSearch extends Manufacture
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'website'], 'safe'],
+            [['id', 'cellsAssigned', 'donorPackModel_id', 'user_id', 'cellSource_id'], 'integer'],
+            [['dateAquired', 'notes'], 'safe'],
+            [['cost'], 'number'],
         ];
     }
 
@@ -41,7 +42,7 @@ class ManufactureSearch extends Manufacture
      */
     public function search($params)
     {
-        $query = Manufacture::find();
+        $query = DonorPack::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +61,15 @@ class ManufactureSearch extends Manufacture
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'cellsAssigned' => $this->cellsAssigned,
+            'donorPackModel_id' => $this->donorPackModel_id,
+            'user_id' => $this->user_id,
+            'cellSource_id' => $this->cellSource_id,
+            'dateAquired' => $this->dateAquired,
+            'cost' => $this->cost,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'website', $this->website]);
+        $query->andFilterWhere(['like', 'notes', $this->notes]);
 
         return $dataProvider;
     }

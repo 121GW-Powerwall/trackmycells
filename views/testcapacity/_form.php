@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\Cell;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Testcapacity */
@@ -12,7 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'cellId')->textInput() ?>
+    <?= $form->field($model, 'cell_id')->dropDownList(
+        ArrayHelper::map(Cell::find()->all(),'id','label'),
+            ['prompt'=>'Select Cell']
+    )  ?>
 
     <?= $form->field($model, 'capacity')->textInput() ?>
 

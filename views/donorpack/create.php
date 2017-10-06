@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Testcapacity */
+/* @var $model app\models\DonorPack */
 
-$this->title = 'Add a capacity test';
-$this->params['breadcrumbs'][] = ['label' => 'Capacity tests', 'url' => ['index']];
+$this->title = 'Create Donor Pack';
+$this->params['breadcrumbs'][] = ['label' => 'Donor Packs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="testcapacity-create">
+<div class="donor-pack-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

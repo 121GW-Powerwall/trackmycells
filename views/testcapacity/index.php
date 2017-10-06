@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TestcapacitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Testcapacities';
+$this->title = 'Capacity tests';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="testcapacity-index">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'cellId',
+            'cell_id',
             'capacity',
             'testDate',
 

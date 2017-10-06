@@ -1,3 +1,4 @@
+
 <?php
 
 namespace app\models;
@@ -5,19 +6,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Cell_Size".
+ * This is the model class for table "cellSize".
  *
- * @property integer $Cell_Size_ID
- * @property string $Name
+ * @property integer $id
+ * @property string $name
+ *
+ * @property CellModel[] $cellModels
+ * @property DonorPackModel[] $donorPackModels
  */
-class Cellsize extends \yii\db\ActiveRecord
+class CellSize extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'Cell_Size';
+        return 'cellSize';
     }
 
     /**
@@ -26,8 +30,8 @@ class Cellsize extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Name'], 'required'],
-            [['Name'], 'string', 'max' => 100],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 100],
         ];
     }
 
@@ -37,8 +41,33 @@ class Cellsize extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cell_Size_ID' => 'Cell  Size  ID',
-            'Name' => 'Name',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellModels()
+    {
+        return $this->hasMany(CellModel::className(), ['cellSize_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDonorPackModels()
+    {
+        return $this->hasMany(DonorPackModel::className(), ['cellSize_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return CellSizeQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CellSizeQuery(get_called_class());
     }
 }

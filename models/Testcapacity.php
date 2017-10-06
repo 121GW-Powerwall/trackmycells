@@ -5,23 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "testcapacity".
+ * This is the model class for table "testCapacity".
  *
  * @property integer $id
- * @property integer $cellId
+ * @property integer $cell_id
  * @property integer $capacity
  * @property string $testDate
  *
+ * @property Cell[] $cells
  * @property Cell $cell
  */
-class Testcapacity extends \yii\db\ActiveRecord
+class TestCapacity extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'testcapacity';
+        return 'testCapacity';
     }
 
     /**
@@ -30,10 +31,10 @@ class Testcapacity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cellId', 'capacity', 'testDate'], 'required'],
-            [['cellId', 'capacity'], 'integer'],
+            [['cell_id', 'capacity', 'testDate'], 'required'],
+            [['cell_id', 'capacity'], 'integer'],
             [['testDate'], 'safe'],
-            [['cellId'], 'exist', 'skipOnError' => true, 'targetClass' => Cell::className(), 'targetAttribute' => ['cellId' => 'Cell_ID']],
+            [['cell_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cell::className(), 'targetAttribute' => ['cell_id' => 'id']],
         ];
     }
 
@@ -43,11 +44,19 @@ class Testcapacity extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'cellId' => 'Cell ID',
-            'capacity' => 'Capacity',
-            'testDate' => 'Test Date',
+            'id' => Yii::t('app', 'ID'),
+            'cell_id' => Yii::t('app', 'Cell'),
+            'capacity' => Yii::t('app', 'Capacity'),
+            'testDate' => Yii::t('app', 'Test Date'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCells()
+    {
+        return $this->hasMany(Cell::className(), ['lastTestCapacity_id' => 'id']);
     }
 
     /**
@@ -55,6 +64,15 @@ class Testcapacity extends \yii\db\ActiveRecord
      */
     public function getCell()
     {
-        return $this->hasOne(Cell::className(), ['Cell_ID' => 'cellId']);
+        return $this->hasOne(Cell::className(), ['id' => 'cell_id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return TestCapacityQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new TestCapacityQuery(get_called_class());
     }
 }

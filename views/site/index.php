@@ -15,6 +15,7 @@ $this->title = 'Track My Cells';
         <div class="row">
             <div class="col-lg-4">
                 <h2>Donor Packs</h2>
+                <li><a href="index.php?r=donorpack%2Findex">Donor Pack</a></li>
 
 
             </div>

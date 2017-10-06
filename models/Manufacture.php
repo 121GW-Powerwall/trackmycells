@@ -5,11 +5,14 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Manufacture".
+ * This is the model class for table "manufacture".
  *
- * @property integer $Manufacture_ID
+ * @property integer $id
  * @property string $name
  * @property string $website
+ *
+ * @property CellModel[] $cellModels
+ * @property DonorPackModel[] $donorPackModels
  */
 class Manufacture extends \yii\db\ActiveRecord
 {
@@ -18,7 +21,7 @@ class Manufacture extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Manufacture';
+        return 'manufacture';
     }
 
     /**
@@ -39,9 +42,34 @@ class Manufacture extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Manufacture_ID' => 'Manufacture  ID',
-            'name' => 'Name',
-            'website' => 'Website',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'website' => Yii::t('app', 'Website'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellModels()
+    {
+        return $this->hasMany(CellModel::className(), ['manufacture_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDonorPackModels()
+    {
+        return $this->hasMany(DonorPackModel::className(), ['manufacture_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return ManufactureQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ManufactureQuery(get_called_class());
     }
 }
