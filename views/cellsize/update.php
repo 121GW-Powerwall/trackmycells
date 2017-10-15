@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CellSize */
+/* @var $model app\models\Cellsize */
 
-$this->title = 'Update Cell Size: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Cell Sizes', 'url' => ['index']];
+$this->title = 'Update Cellsize: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Cellsizes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="cell-size-update">
+<div class="cellsize-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

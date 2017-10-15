@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\DonorPack;
+use app\models\Donorpack;
 
 /**
- * DonorPackSearch represents the model behind the search form about `app\models\DonorPack`.
+ * DonorpackSearch represents the model behind the search form about `app\models\Donorpack`.
  */
-class DonorPackSearch extends DonorPack
+class DonorpackSearch extends Donorpack
 {
     /**
      * @inheritdoc
@@ -42,7 +42,7 @@ class DonorPackSearch extends DonorPack
      */
     public function search($params)
     {
-        $query = DonorPack::find();
+        $query = Donorpack::find();
 
         // add conditions that should always apply here
 

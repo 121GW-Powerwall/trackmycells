@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CellSizeSearch */
+/* @var $searchModel app\models\CellsizeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cell Sizes';
+$this->title = 'Cellsizes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cell-size-index">
+<div class="cellsize-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Cell Size', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Cellsize', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

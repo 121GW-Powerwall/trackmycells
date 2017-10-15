@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DonorPack */
+/* @var $model app\models\Donorpack */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="donor-pack-form">
+<div class="donorpack-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

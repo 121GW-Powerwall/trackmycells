@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\CellSize;
-use app\models\CellSizeSearch;
+use app\models\Cellsize;
+use app\models\CellsizeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CellSizeController implements the CRUD actions for CellSize model.
+ * CellsizeController implements the CRUD actions for Cellsize model.
  */
-class CellSizeController extends Controller
+class CellsizeController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Lists all CellSize models.
+     * Lists all Cellsize models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CellSizeSearch();
+        $searchModel = new CellsizeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Displays a single CellSize model.
+     * Displays a single Cellsize model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Creates a new CellSize model.
+     * Creates a new Cellsize model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CellSize();
+        $model = new Cellsize();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Updates an existing CellSize model.
+     * Updates an existing Cellsize model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Deletes an existing CellSize model.
+     * Deletes an existing Cellsize model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class CellSizeController extends Controller
     }
 
     /**
-     * Finds the CellSize model based on its primary key value.
+     * Finds the Cellsize model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CellSize the loaded model
+     * @return Cellsize the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CellSize::findOne($id)) !== null) {
+        if (($model = Cellsize::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
