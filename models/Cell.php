@@ -27,6 +27,7 @@ use Yii;
  * @property BackendUser $user
  * @property TestCapacity[] $testCapacities
  * @property TestImp[] $testImps
+ * @property TestVoltage[] $testVoltages
  */
 class Cell extends \yii\db\ActiveRecord
 {
@@ -53,7 +54,7 @@ class Cell extends \yii\db\ActiveRecord
             [['donorPack_id'], 'exist', 'skipOnError' => true, 'targetClass' => DonorPack::className(), 'targetAttribute' => ['donorPack_id' => 'id']],
             [['lastTestCapacity_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestCapacity::className(), 'targetAttribute' => ['lastTestCapacity_id' => 'id']],
             [['lastTestImp_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestImp::className(), 'targetAttribute' => ['lastTestImp_id' => 'id']],
-            [['lastTestVoltage_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestVoltage::className(), 'targetAttribute' => ['lastTestVoltage_id' => 'Test_Voltage_ID']],
+            [['lastTestVoltage_id'], 'exist', 'skipOnError' => true, 'targetClass' => TestVoltage::className(), 'targetAttribute' => ['lastTestVoltage_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => BackendUser::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -122,7 +123,7 @@ class Cell extends \yii\db\ActiveRecord
      */
     public function getLastTestVoltage()
     {
-        return $this->hasOne(TestVoltage::className(), ['Test_Voltage_ID' => 'lastTestVoltage_id']);
+        return $this->hasOne(TestVoltage::className(), ['id' => 'lastTestVoltage_id']);
     }
 
     /**
@@ -150,11 +151,10 @@ class Cell extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
-     * @return CellQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getTestVoltages()
     {
-        return new CellQuery(get_called_class());
+        return $this->hasMany(TestVoltage::className(), ['cell_id' => 'id']);
     }
 }
