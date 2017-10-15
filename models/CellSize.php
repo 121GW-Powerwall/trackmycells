@@ -1,4 +1,3 @@
-
 <?php
 
 namespace app\models;
@@ -60,14 +59,5 @@ class CellSize extends \yii\db\ActiveRecord
     public function getDonorPackModels()
     {
         return $this->hasMany(DonorPackModel::className(), ['cellSize_id' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return CellSizeQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new CellSizeQuery(get_called_class());
     }
 }
