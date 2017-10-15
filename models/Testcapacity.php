@@ -11,7 +11,6 @@ use Yii;
  * @property integer $cell_id
  * @property integer $capacity
  * @property string $testDate
- *
  * @property Cell[] $cells
  * @property Cell $cell
  */
