@@ -24,7 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             #['class' => 'yii\grid\SerialColumn'],
             'id:text:Test ID',
-            'cell_id' => 'cell.label:text:Cell Label',
+            [
+                'label' => 'Cell Label',
+                'attribute' => 'cell_id',
+                'format' => 'raw',
+                'value' => function($data){
+                    $url = "index.php?r=cell/view&id=" . $data->cell_id;
+                    return Html::a($data->cell->label, $url, ['title' => 'Go']);
+                }
+            ],
+            #'cell_id' => 'cell.label:text:Cell Label',
             'capacity',
             'testDate',
             ['class' => 'yii\grid\ActionColumn'],
