@@ -30,6 +30,5 @@ $this->title = 'Track My Cells';
                 <h2>Your Packs</h2>
             </div>
         </div>
-
     </div>
 </div>

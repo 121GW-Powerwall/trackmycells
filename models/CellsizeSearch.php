@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CellSize;
+use app\models\Cellsize;
 
 /**
- * CellSizeSearch represents the model behind the search form about `app\models\CellSize`.
+ * CellsizeSearch represents the model behind the search form about `app\models\Cellsize`.
  */
-class CellSizeSearch extends CellSize
+class CellsizeSearch extends Cellsize
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class CellSizeSearch extends CellSize
      */
     public function search($params)
     {
-        $query = CellSize::find();
+        $query = Cellsize::find();
 
         // add conditions that should always apply here
 

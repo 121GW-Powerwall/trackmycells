@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\DonorPackSearch */
+/* @var $searchModel app\models\DonorpackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Donor Packs';
+$this->title = 'Donorpacks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="donor-pack-index">
+<div class="donorpack-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Donor Pack', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Donorpack', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

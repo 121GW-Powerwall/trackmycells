@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CellSizeSearch */
+/* @var $model app\models\CellsizeSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="cell-size-search">
+<div class="cellsize-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

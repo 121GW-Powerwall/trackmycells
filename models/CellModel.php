@@ -5,27 +5,28 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Cell_Model".
+ * This is the model class for table "cellModel".
  *
- * @property integer $Cell_Model_ID
- * @property integer $Manufacture_ID
- * @property integer $Cell_Type_ID
- * @property integer $Cell_Size_ID
- * @property string $Name
- * @property integer $Man_Cap
- * @property double $Man_Max_V
- * @property double $Man_Nom_V
- * @property double $Man_Min_V
- * @property double $Man_Max_mA
- * @property double $Man_Std_mA
- * @property double $Man_Charge_V
- * @property integer $Man_Charge_mA
- * @property double $Man_Dis_V
- * @property integer $Man_Dis_mA
- * @property string $Wrap_Color
- * @property string $Ring_Color
- * @property double $Man_Max_Internal_Imp
- * @property string $Man_Spec_Sheet
+ * @property integer $id
+ * @property integer $manufacture_id
+ * @property integer $cellType_id
+ * @property integer $cellSize_id
+ * @property string $name
+ * @property integer $capacity
+ * @property double $nominalV
+ * @property double $chargingV
+ * @property integer $chargingC
+ * @property double $dischargeV
+ * @property integer $dischargeC
+ * @property string $wrapColor
+ * @property string $ringColor
+ * @property double $maxInternalImp
+ * @property string $manSpecSheet
+ *
+ * @property Cell[] $cells
+ * @property CellSize $cellSize
+ * @property CellType $cellType
+ * @property Manufacture $manufacture
  */
 class Cellmodel extends \yii\db\ActiveRecord
 {
@@ -34,7 +35,7 @@ class Cellmodel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Cell_Model';
+        return 'cellModel';
     }
 
     /**
@@ -43,11 +44,14 @@ class Cellmodel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Manufacture_ID', 'Cell_Type_ID', 'Cell_Size_ID', 'Name'], 'required'],
-            [['Manufacture_ID', 'Cell_Type_ID', 'Cell_Size_ID', 'Man_Cap', 'Man_Charge_mA', 'Man_Dis_mA'], 'integer'],
-            [['Man_Max_V', 'Man_Nom_V', 'Man_Min_V', 'Man_Max_mA', 'Man_Std_mA', 'Man_Charge_V', 'Man_Dis_V', 'Man_Max_Internal_Imp'], 'number'],
-            [['Name', 'Wrap_Color', 'Ring_Color'], 'string', 'max' => 100],
-            [['Man_Spec_Sheet'], 'string', 'max' => 255],
+            [['manufacture_id', 'cellType_id', 'cellSize_id', 'name'], 'required'],
+            [['manufacture_id', 'cellType_id', 'cellSize_id', 'capacity', 'chargingC', 'dischargeC'], 'integer'],
+            [['nominalV', 'chargingV', 'dischargeV', 'maxInternalImp'], 'number'],
+            [['name', 'wrapColor', 'ringColor'], 'string', 'max' => 100],
+            [['manSpecSheet'], 'string', 'max' => 255],
+            [['cellSize_id'], 'exist', 'skipOnError' => true, 'targetClass' => CellSize::className(), 'targetAttribute' => ['cellSize_id' => 'id']],
+            [['cellType_id'], 'exist', 'skipOnError' => true, 'targetClass' => CellType::className(), 'targetAttribute' => ['cellType_id' => 'id']],
+            [['manufacture_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manufacture::className(), 'targetAttribute' => ['manufacture_id' => 'id']],
         ];
     }
 
@@ -57,25 +61,53 @@ class Cellmodel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cell_Model_ID' => 'Cell  Model  ID',
-            'Manufacture_ID' => 'Manufacture  ID',
-            'Cell_Type_ID' => 'Cell  Type  ID',
-            'Cell_Size_ID' => 'Cell  Size  ID',
-            'Name' => 'Name',
-            'Man_Cap' => 'Man  Cap',
-            'Man_Max_V' => 'Man  Max  V',
-            'Man_Nom_V' => 'Man  Nom  V',
-            'Man_Min_V' => 'Man  Min  V',
-            'Man_Max_mA' => 'Man  Max M A',
-            'Man_Std_mA' => 'Man  Std M A',
-            'Man_Charge_V' => 'Man  Charge  V',
-            'Man_Charge_mA' => 'Man  Charge M A',
-            'Man_Dis_V' => 'Man  Dis  V',
-            'Man_Dis_mA' => 'Man  Dis M A',
-            'Wrap_Color' => 'Wrap  Color',
-            'Ring_Color' => 'Ring  Color',
-            'Man_Max_Internal_Imp' => 'Man  Max  Internal  Imp',
-            'Man_Spec_Sheet' => 'Man  Spec  Sheet',
+            'id' => Yii::t('app', 'ID'),
+            'manufacture_id' => Yii::t('app', 'Manufacture ID'),
+            'cellType_id' => Yii::t('app', 'Cell Type ID'),
+            'cellSize_id' => Yii::t('app', 'Cell Size ID'),
+            'name' => Yii::t('app', 'Name'),
+            'capacity' => Yii::t('app', 'Capacity'),
+            'nominalV' => Yii::t('app', 'Nominal V'),
+            'chargingV' => Yii::t('app', 'Charging V'),
+            'chargingC' => Yii::t('app', 'Charging C'),
+            'dischargeV' => Yii::t('app', 'Discharge V'),
+            'dischargeC' => Yii::t('app', 'Discharge C'),
+            'wrapColor' => Yii::t('app', 'Wrap Color'),
+            'ringColor' => Yii::t('app', 'Ring Color'),
+            'maxInternalImp' => Yii::t('app', 'Max Internal Imp'),
+            'manSpecSheet' => Yii::t('app', 'Man Spec Sheet'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCells()
+    {
+        return $this->hasMany(Cell::className(), ['cellModel_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellSize()
+    {
+        return $this->hasOne(CellSize::className(), ['id' => 'cellSize_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCellType()
+    {
+        return $this->hasOne(CellType::className(), ['id' => 'cellType_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getManufacture()
+    {
+        return $this->hasOne(Manufacture::className(), ['id' => 'manufacture_id']);
     }
 }

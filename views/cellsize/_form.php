@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CellSize */
+/* @var $model app\models\Cellsize */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="cell-size-form">
+<div class="cellsize-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

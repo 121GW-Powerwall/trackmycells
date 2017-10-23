@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\DonorPack;
-use app\models\DonorPackSearch;
+use app\models\Cellsize;
+use app\models\CellsizeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DonorPackController implements the CRUD actions for DonorPack model.
+ * CellsizeController implements the CRUD actions for Cellsize model.
  */
-class DonorPackController extends Controller
+class CellsizeController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Lists all DonorPack models.
+     * Lists all Cellsize models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DonorPackSearch();
+        $searchModel = new CellsizeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Displays a single DonorPack model.
+     * Displays a single Cellsize model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Creates a new DonorPack model.
+     * Creates a new Cellsize model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DonorPack();
+        $model = new Cellsize();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Updates an existing DonorPack model.
+     * Updates an existing Cellsize model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Deletes an existing DonorPack model.
+     * Deletes an existing Cellsize model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class DonorPackController extends Controller
     }
 
     /**
-     * Finds the DonorPack model based on its primary key value.
+     * Finds the Cellsize model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DonorPack the loaded model
+     * @return Cellsize the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DonorPack::findOne($id)) !== null) {
+        if (($model = Cellsize::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

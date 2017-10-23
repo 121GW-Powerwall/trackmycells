@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CellSize */
+/* @var $model app\models\Cellsize */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Cell Sizes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Cellsizes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cell-size-view">
+<div class="cellsize-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

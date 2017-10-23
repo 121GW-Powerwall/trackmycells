@@ -16,19 +16,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Testcapacity', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add a capacity test', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'cell_id',
+            #['class' => 'yii\grid\SerialColumn'],
+            'id:text:Test ID',
+            [
+                'label' => 'Cell Label',
+                'attribute' => 'cell_id',
+                'format' => 'raw',
+                'value' => function($data){
+                    $url = "index.php?r=cell/view&id=" . $data->cell_id;
+                    return Html::a($data->cell->label, $url, ['title' => 'Go']);
+                }
+            ],
+            #'cell_id' => 'cell.label:text:Cell Label',
             'capacity',
             'testDate',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

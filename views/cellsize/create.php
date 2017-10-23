@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CellSize */
+/* @var $model app\models\Cellsize */
 
-$this->title = 'Create Cell Size';
-$this->params['breadcrumbs'][] = ['label' => 'Cell Sizes', 'url' => ['index']];
+$this->title = 'Create Cellsize';
+$this->params['breadcrumbs'][] = ['label' => 'Cellsizes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cell-size-create">
+<div class="cellsize-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

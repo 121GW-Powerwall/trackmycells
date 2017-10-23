@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DonorPackSearch */
+/* @var $model app\models\DonorpackSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="donor-pack-search">
+<div class="donorpack-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
