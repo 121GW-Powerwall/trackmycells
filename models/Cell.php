@@ -139,7 +139,8 @@ class Cell extends \yii\db\ActiveRecord
      */
     public function getTestCapacities()
     {
-        return $this->hasMany(TestCapacity::className(), ['cell_id' => 'id']);
+        return $this->hasMany(TestCapacity::className(), ['cell_id' => 'id'])->
+            orderBy(['testDate' => SORT_DESC]);
     }
 
     /**
@@ -147,7 +148,8 @@ class Cell extends \yii\db\ActiveRecord
      */
     public function getTestImps()
     {
-        return $this->hasMany(TestImp::className(), ['cell_id' => 'id']);
+        return $this->hasMany(TestImp::className(), ['cell_id' => 'id'])->
+            orderBy(['testDate' => SORT_DESC]);
     }
 
     /**
@@ -155,6 +157,7 @@ class Cell extends \yii\db\ActiveRecord
      */
     public function getTestVoltages()
     {
-        return $this->hasMany(TestVoltage::className(), ['cell_id' => 'id']);
+        return $this->hasMany(TestVoltage::className(), ['cell_id' => 'id'])->
+            orderBy(['testDate' => SORT_DESC]);
     }
 }
