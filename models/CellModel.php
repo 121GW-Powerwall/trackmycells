@@ -33,6 +33,10 @@ class Cellmodel extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    //public static function find()
+    //{
+    //    return parent::find()->where(['=', 'user_id', '2']);
+    //}
     public static function tableName()
     {
         return 'cellModel';

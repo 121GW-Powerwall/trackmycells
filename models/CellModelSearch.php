@@ -42,8 +42,6 @@ class CellmodelSearch extends Cellmodel
      */
     public function search($params)
     {
-        $query = Cellmodel::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

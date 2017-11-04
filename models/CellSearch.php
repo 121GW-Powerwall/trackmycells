@@ -41,7 +41,8 @@ class CellSearch extends Cell
      */
     public function search($params)
     {
-        $query = Cell::find();
+        $query = Cell::find()->
+                where (['user_id' => Yii::$app->user->identity->id]);
 
         // add conditions that should always apply here
 
@@ -52,7 +53,8 @@ class CellSearch extends Cell
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return any 
+            // records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }

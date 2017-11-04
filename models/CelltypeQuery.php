@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[DonorPackModel]].
+ * This is the ActiveQuery class for [[Celltype]].
  *
- * @see DonorPackModel
+ * @see Celltype
  */
-class DonorPackModelQuery extends \yii\db\ActiveQuery
+class CelltypeQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class DonorPackModelQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return DonorPackModel[]|array
+     * @return Celltype[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class DonorPackModelQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return DonorPackModel|array|null
+     * @return Celltype|array|null
      */
     public function one($db = null)
     {

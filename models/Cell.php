@@ -29,7 +29,9 @@ use Yii;
  * @property TestImp[] $testImps
  * @property TestVoltage[] $testVoltages
  */
+
 class Cell extends \yii\db\ActiveRecord
+
 {
     /**
      * @inheritdoc

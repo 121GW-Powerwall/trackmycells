@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Donorpack;
+use app\models\Donorpackmodel;
 
 /**
- * DonorpackSearch represents the model behind the search form about `app\models\Donorpack`.
+ * DonorpackmodelSearch represents the model behind the search form about `app\models\Donorpackmodel`.
  */
-class DonorpackSearch extends Donorpack
+class DonorpackmodelSearch extends Donorpackmodel
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class DonorpackSearch extends Donorpack
     public function rules()
     {
         return [
-            [['id', 'cellsAssigned', 'donorPackModel_id', 'user_id', 'cellSource_id'], 'integer'],
-            [['dateAquired', 'notes'], 'safe'],
-            [['cost'], 'number'],
+            [['id', 'cellType_id', 'cellSize_id', 'manufacture_id', 'numberOfCells'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -42,8 +41,7 @@ class DonorpackSearch extends Donorpack
      */
     public function search($params)
     {
-        $query = Donorpack::find()->
-                where (['user_id' => Yii::$app->user->identity->id]);
+        $query = Donorpackmodel::find();
 
         // add conditions that should always apply here
 
@@ -62,15 +60,13 @@ class DonorpackSearch extends Donorpack
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'cellsAssigned' => $this->cellsAssigned,
-            'donorPackModel_id' => $this->donorPackModel_id,
-            'user_id' => $this->user_id,
-            'cellSource_id' => $this->cellSource_id,
-            'dateAquired' => $this->dateAquired,
-            'cost' => $this->cost,
+            'cellType_id' => $this->cellType_id,
+            'cellSize_id' => $this->cellSize_id,
+            'manufacture_id' => $this->manufacture_id,
+            'numberOfCells' => $this->numberOfCells,
         ]);
 
-        $query->andFilterWhere(['like', 'notes', $this->notes]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
